@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./index.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [form, setForm] = useState({ fullName: "", role: "", startDate: "" });
+
+  const handleChange = (e) =>
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <main className="max-w-lg mx-auto p-6">
+      <h1 className="text-2xl font-bold text-assuraGreen mb-4">
+        New Starter Form
+      </h1>
 
-export default App
+      {/* Section 1 — User Details */}
+      <section className="space-y-4">
+        <label className="block">
+          <span className="font-medium">Full Name *</span>
+          <input
+            name="fullName"
+            value={form.fullName}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </label>
+
+        <label className="block">
+          <span className="font-medium">Job Role *</span>
+          <input
+            name="role"
+            value={form.role}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </label>
+
+        <label className="block">
+          <span className="font-medium">Start Date *</span>
+          <input
+            type="date"
+            name="startDate"
+            value={form.startDate}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </label>
+      </section>
+    </main>
+  );
+}
