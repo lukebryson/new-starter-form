@@ -2,22 +2,30 @@ import { useState } from "react";
 import "./index.css";
 
 export default function App() {
-  const [form, setForm] = useState({ fullName: "", role: "", startDate: "" });
+  const [form, setForm] = useState({
+    fullName: "",
+    jobRole: "",
+    startDate: "",
+  });
 
-  const handleChange = (e) =>
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  // Handles input changes
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
 
   return (
     <main className="max-w-lg mx-auto p-6">
-      <h1 className="text-2xl font-bold text-assuraGreen mb-4">
+      <h1 className="text-2xl font-bold text-[#00823B] mb-4">
         New Starter Form
       </h1>
 
-      {/* Section 1 — User Details */}
-      <section className="space-y-4">
+      {/* Section 1 – User Details */}
+      <form className="space-y-4" autoComplete="off">
         <label className="block">
           <span className="font-medium">Full Name *</span>
           <input
+            type="text"
             name="fullName"
             value={form.fullName}
             onChange={handleChange}
@@ -29,8 +37,9 @@ export default function App() {
         <label className="block">
           <span className="font-medium">Job Role *</span>
           <input
-            name="role"
-            value={form.role}
+            type="text"
+            name="jobRole"
+            value={form.jobRole}
             onChange={handleChange}
             className="w-full p-2 border rounded"
             required
@@ -48,7 +57,7 @@ export default function App() {
             required
           />
         </label>
-      </section>
+      </form>
     </main>
   );
 }
