@@ -6,6 +6,25 @@ import AppsAndServices from "./AppsAndServices.jsx";
 import DirectoriesAndAccess from "./DirectoriesAndAccess.jsx";
 import ReviewAndSubmit from "./ReviewAndSubmit.jsx";
 
+// Import logo from public folder (use process.env.PUBLIC_URL for Vite if needed)
+import assuraLogo from "/assura_logo.svg";
+
+// Navbar component
+function Navbar() {
+  return (
+    <nav className="bg-[#1E3E89] text-white flex items-center justify-center px-4 py-3 mb-8 rounded-b-lg shadow">
+      {/* Centered Logo and Title */}
+      <div className="flex items-center gap-3">
+        <img src={assuraLogo} alt="Assura logo" className="h-12 w-auto" />
+        <span className="font-gothic text-xl font-bold tracking-wide">
+          New Starter Form
+        </span>
+      </div>
+    </nav>
+  );
+}
+
+
 export default function App() {
   // Shared form state across all steps
   const [formData, setFormData] = useState({
@@ -41,56 +60,54 @@ export default function App() {
   };
 
   return (
-    <main className="max-w-lg mx-auto p-6">
-      <h1 className="text-2xl font-bold text-assuraGreen mb-4">New Starter Form</h1>
-
-      {/* Render the current section based on the step */}
-      {step === 1 && (
-        <UserDetails formData={formData} handleChange={handleChange} />
-      )}
-      {step === 2 && (
-        <HardwareRequirements formData={formData} handleChange={handleChange} />
-      )}
-      {step === 3 && (
-        <AppsAndServices formData={formData} handleChange={handleChange} />
-      )}
-      {step === 4 && (
-        <DirectoriesAndAccess formData={formData} handleChange={handleChange} />
-      )}
-      {step === 5 && (
-        <ReviewAndSubmit formData={formData} />
-      )}
-
-      {/* Navigation buttons */}
-      <div className="mt-4 flex justify-between">
-        {step > 1 && (
-          <button 
-            type="button" 
-            onClick={prevStep} 
-            className="px-4 py-2 border rounded"
-          >
-            Back
-          </button>
+    <>
+      <Navbar />
+      <main className="max-w-lg mx-auto p-6">
+        {/* Render the current section based on the step */}
+        {step === 1 && (
+          <UserDetails formData={formData} handleChange={handleChange} />
         )}
-        {step < 5 ? (
-          <button 
-            type="button" 
-            onClick={nextStep} 
-            className="px-4 py-2 border rounded"
-          >
-            Next
-          </button>
-        ) : (
-          <button 
-            type="button" 
-            onClick={handleSubmit} 
-            className="px-4 py-2 border rounded bg-green-600 text-white"
-          >
-            Submit
-          </button>
+        {step === 2 && (
+          <HardwareRequirements formData={formData} handleChange={handleChange} />
         )}
-      </div>
-    </main>
+        {step === 3 && (
+          <AppsAndServices formData={formData} handleChange={handleChange} />
+        )}
+        {step === 4 && (
+          <DirectoriesAndAccess formData={formData} handleChange={handleChange} />
+        )}
+        {step === 5 && <ReviewAndSubmit formData={formData} />}
+
+        {/* Navigation buttons */}
+        <div className="mt-4 flex justify-between">
+          {step > 1 && (
+            <button
+              type="button"
+              onClick={prevStep}
+              className="px-4 py-2 border rounded"
+            >
+              Back
+            </button>
+          )}
+          {step < 5 ? (
+            <button
+              type="button"
+              onClick={nextStep}
+              className="px-4 py-2 border rounded"
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="px-4 py-2 border rounded bg-green-600 text-white"
+            >
+              Submit
+            </button>
+          )}
+        </div>
+      </main>
+    </>
   );
 }
-
