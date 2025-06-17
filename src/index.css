@@ -5,3 +5,7 @@
 body {
   @apply font-gothic;
 }
+
+input[type="checkbox"] {
+  accent-color: #1E3E89;
+}
