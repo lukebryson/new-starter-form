@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-// src/AppsAndServices.jsx
 export default function AppsAndServices({ formData, handleChange }) {
   const dynamicsOptions = [
     "Complaints",
@@ -22,21 +21,24 @@ export default function AppsAndServices({ formData, handleChange }) {
     "Other"
   ].sort();
 
-  // Ensure selectedApps is always an array in formData
+  // Ensure selectedApps and dynamicsApps are always arrays in formData
   useEffect(() => {
     if (!Array.isArray(formData.selectedApps)) {
       handleChange({
-        target: {
-          name: "selectedApps",
-          value: [],
-          type: "init"
-        }
+        name: "selectedApps",
+        value: [],
+      });
+    }
+    if (!Array.isArray(formData.dynamicsApps)) {
+      handleChange({
+        name: "dynamicsApps",
+        value: [],
       });
     }
     // eslint-disable-next-line
   }, []);
 
-  // Custom handler for checkboxes
+  // Custom handler for main app checkboxes
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;
     const selected = Array.isArray(formData.selectedApps) ? formData.selectedApps : [];
@@ -46,9 +48,24 @@ export default function AppsAndServices({ formData, handleChange }) {
     } else {
       updated = selected.filter((v) => v !== value);
     }
-    // Call handleChange with a plain object
     handleChange({
       name: "selectedApps",
+      value: updated,
+    });
+  };
+
+  // Custom handler for Dynamics 365 sub-apps checkboxes
+  const handleDynamicsCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    const selected = Array.isArray(formData.dynamicsApps) ? formData.dynamicsApps : [];
+    let updated;
+    if (checked) {
+      updated = [...selected, value];
+    } else {
+      updated = selected.filter((v) => v !== value);
+    }
+    handleChange({
+      name: "dynamicsApps",
       value: updated,
     });
   };
@@ -78,19 +95,20 @@ export default function AppsAndServices({ formData, handleChange }) {
             <label className="block font-medium mb-1">
               Which Dynamics 365 apps?
             </label>
-            <select
-              name="dynamicsApp"
-              value={formData.dynamicsApp || ""}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            >
-              <option value="">Select an app</option>
+            <div className="space-y-2">
               {dynamicsOptions.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
+                <label key={opt} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    name="dynamicsApps"
+                    value={opt}
+                    checked={Array.isArray(formData.dynamicsApps) && formData.dynamicsApps.includes(opt)}
+                    onChange={handleDynamicsCheckboxChange}
+                  />
+                  <span className="ml-2">{opt}</span>
+                </label>
               ))}
-            </select>
+            </div>
           </div>
         )}
 
