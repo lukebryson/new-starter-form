@@ -42,6 +42,16 @@ export default function App() {
 
   // Handle input changes for text, date, and checkbox fields
   const handleChange = (e) => {
+    // If e.target is missing, treat as direct value update (from AppsAndServices)
+    if (!e.target) {
+      // e should be an object: { name, value }
+      setFormData((prevData) => ({
+        ...prevData,
+        [e.name]: e.value,
+      }));
+      return;
+    }
+
     const { name, value, type, checked } = e.target;
 
     // Handle checkbox group for selectedApps and fileAccess
