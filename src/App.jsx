@@ -43,10 +43,18 @@ export default function App() {
   // Handle input changes for text, date, and checkbox fields
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    // Handle checkbox group for selectedApps
+    if (name === "selectedApps") {
+      setFormData((prevData) => ({
+        ...prevData,
+        selectedApps: value, // value is already the updated array from AppsAndServices
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: type === "checkbox" ? checked : value,
+      }));
+    }
   };
 
   // Navigation handlers for Next/Back buttons
