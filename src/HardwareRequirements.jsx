@@ -16,7 +16,7 @@ export default function HardwareRequirements({ formData, handleChange }) {
             <option value="">Select device</option>
             <option value="Laptop">Laptop</option>
             <option value="Surface Pro">Surface Pro</option>
-            <option value="Other">Other (please specify)</option>
+            <option value="Other">Other</option>
           </select>
         </label>
         {formData.deviceType === "Other" && (
@@ -34,49 +34,24 @@ export default function HardwareRequirements({ formData, handleChange }) {
         )}
 
         {/* Company Mobile */}
-        <div></div>
-        <label className="inline-flex items-center space-x-2">
-          <input
-            name="companyMobile"
-            type="checkbox"
-            checked={formData.companyMobile || false}
-            onChange={handleChange}
-          />
-          <span className="font-medium">Company Mobile</span>
-        </label>
-
-        {/* Keyboard & Mouse */}
-        <label className="inline-flex items-center space-x-2">
-          <input
-            name="keyboardMouse"
-            type="checkbox"
-            checked={formData.keyboardMouse || false}
-            onChange={handleChange}
-          />
-          <span className="font-medium">Keyboard & Mouse</span>
-        </label>
-
-        {/* Docking Station */}
-        <label className="inline-flex items-center space-x-2">
-          <input
-            name="dockingStation"
-            type="checkbox"
-            checked={formData.dockingStation || false}
-            onChange={handleChange}
-          />
-          <span className="font-medium">Docking Station</span>
-        </label>
-
-        {/* Monitor */}
-        <label className="inline-flex items-center space-x-2">
-          <input
-            name="monitor"
-            type="checkbox"
-            checked={formData.monitor || false}
-            onChange={handleChange}
-          />
-          <span className="font-medium">Monitor</span>
-        </label>
+        <div className="space-y-2">
+          {[
+            "Company Mobile",
+            "Keyboard & Mouse",
+            "Docking Station",
+            "Monitor",
+          ].map((item) => (
+            <label key={item} className="flex items-center">
+              <input
+                name={item.replace(/ & /, "").toLowerCase()}
+                type="checkbox"
+                checked={formData[item.replace(/ & /, "").toLowerCase()] || false}
+                onChange={handleChange}
+              />{" "}
+              <span className="ml-2">{item}</span>
+            </label>
+          ))}
+        </div>
 
         {/* Laptop Bag */}
         <label className="block">
