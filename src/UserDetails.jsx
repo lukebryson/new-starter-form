@@ -1,3 +1,7 @@
+import React from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 // src/UserDetails.jsx
 export default function UserDetails({ formData, handleChange }) {
   const departments = [
@@ -16,6 +20,25 @@ export default function UserDetails({ formData, handleChange }) {
   // Move "Other" to the end after sorting
   const sortedDepartments = departments.filter(d => d !== "Other").sort();
   sortedDepartments.push("Other");
+
+  // Convert string to Date object for react-datepicker
+  const startDateValue = formData.startDate ? new Date(formData.startDate) : null;
+
+  // Custom handler for react-datepicker
+  const handleDateChange = (date) => {
+    // Format as yyyy-mm-dd for consistency
+    const formatted =
+      date && !isNaN(date)
+        ? date.toISOString().slice(0, 10)
+        : "";
+    handleChange({
+      target: {
+        name: "startDate",
+        value: formatted,
+        type: "date",
+      },
+    });
+  };
 
   return (
     <div>
@@ -94,17 +117,15 @@ export default function UserDetails({ formData, handleChange }) {
             placeholder="e.g., MRICS, MCIPD, MBCS"
           />
         </label>
-        <label className="block">
-          <span className="font-medium">Start Date *</span>
-          <input
-            name="startDate"
-            type="date"
-            value={formData.startDate}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            required
-          />
-        </label>
+        <label className="block font-medium mb-1">Start Date *</label>
+        <DatePicker
+          selected={startDateValue}
+          onChange={handleDateChange}
+          dateFormat="dd/MM/yyyy"
+          className="w-full p-2 border rounded font-gothic"
+          placeholderText="Select start date"
+          calendarClassName="font-gothic"
+        />
       </div>
     </div>
   );
