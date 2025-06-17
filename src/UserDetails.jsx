@@ -1,5 +1,22 @@
 // src/UserDetails.jsx
 export default function UserDetails({ formData, handleChange }) {
+  const departments = [
+    "Development",
+    "Finance",
+    "HR",
+    "Investment",
+    "IT",
+    "Marketing",
+    "PA",
+    "Portfolio",
+    "Rotation (Property)",
+    "Other"
+  ].sort();
+
+  // Move "Other" to the end after sorting
+  const sortedDepartments = departments.filter(d => d !== "Other").sort();
+  sortedDepartments.push("Other");
+
   return (
     <div>
       <h2 className="text-xl font-semibold mb-2">User Details</h2>
@@ -28,41 +45,31 @@ export default function UserDetails({ formData, handleChange }) {
         </label>
         <div>
           <span className="font-medium block mb-1">Department *</span>
-          <div className="flex gap-4">
-            <label>
+          <div className="flex flex-wrap gap-4">
+            {sortedDepartments.map((dept) => (
+              <label key={dept}>
+                <input
+                  type="radio"
+                  name="department"
+                  value={dept}
+                  checked={formData.department === dept}
+                  onChange={handleChange}
+                  required
+                />{" "}
+                {dept}
+              </label>
+            ))}
+            {formData.department === "Other" && (
               <input
-                type="radio"
-                name="department"
-                value="HR"
-                checked={formData.department === "HR"}
+                name="departmentOther"
+                type="text"
+                value={formData.departmentOther || ""}
                 onChange={handleChange}
+                className="ml-2 p-2 border rounded"
+                placeholder="Please specify"
                 required
-              />{" "}
-              HR
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="department"
-                value="IT"
-                checked={formData.department === "IT"}
-                onChange={handleChange}
-                required
-              />{" "}
-              IT
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="department"
-                value="Finance"
-                checked={formData.department === "Finance"}
-                onChange={handleChange}
-                required
-              />{" "}
-              Finance
-            </label>
-            {/* Add more departments as needed */}
+              />
+            )}
           </div>
         </div>
         <label className="block">
