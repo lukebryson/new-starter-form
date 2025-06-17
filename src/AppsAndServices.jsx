@@ -46,12 +46,10 @@ export default function AppsAndServices({ formData, handleChange }) {
     } else {
       updated = selected.filter((v) => v !== value);
     }
+    // Call handleChange with a plain object
     handleChange({
-      target: {
-        name: "selectedApps",
-        value: updated,
-        type: "checkbox-group"
-      }
+      name: "selectedApps",
+      value: updated,
     });
   };
 
