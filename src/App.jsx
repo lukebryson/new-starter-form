@@ -43,12 +43,17 @@ export default function App() {
   // Handle input changes for text, date, and checkbox fields
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    // Handle checkbox group for selectedApps
-    if (name === "selectedApps") {
-      setFormData((prevData) => ({
-        ...prevData,
-        selectedApps: value, // value is already the updated array from AppsAndServices
-      }));
+
+    // Handle checkbox group for selectedApps and fileAccess
+    if (name === "selectedApps" || name === "fileAccess") {
+      setFormData((prevData) => {
+        const arr = Array.isArray(prevData[name]) ? prevData[name] : [];
+        if (checked) {
+          return { ...prevData, [name]: [...arr, value] };
+        } else {
+          return { ...prevData, [name]: arr.filter((v) => v !== value) };
+        }
+      });
     } else {
       setFormData((prevData) => ({
         ...prevData,
