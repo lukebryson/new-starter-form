@@ -32,11 +32,12 @@ export default function UserDetails({ formData, handleChange }) {
         ? date.toISOString().slice(0, 10)
         : "";
     handleChange({
-      target: {
-        name: "startDate",
-        value: formatted,
-        type: "date",
-      },
+      target:
+        {
+          name: "startDate",
+          value: formatted,
+          type: "date",
+        },
     });
   };
 
@@ -117,7 +118,7 @@ export default function UserDetails({ formData, handleChange }) {
             placeholder="e.g., MRICS, MCIPD, MBCS"
           />
         </label>
-        <label className="block font-medium mb-1">Start Date *</label>
+        <label className="block font-medium mb-1">Start Date</label>
         <DatePicker
           selected={startDateValue}
           onChange={handleDateChange}
