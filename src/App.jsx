@@ -1,13 +1,14 @@
 // src/App.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UserDetails from "./UserDetails.jsx";
 import HardwareRequirements from "./HardwareRequirements.jsx";
 import AppsAndServices from "./AppsAndServices.jsx";
 import DirectoriesAndAccess from "./DirectoriesAndAccess.jsx";
 import ReviewAndSubmit from "./ReviewAndSubmit.jsx";
 
-// Import logo from public folder (use process.env.PUBLIC_URL for Vite if needed)
-import assuraLogo from "/assura_logo.svg";
+// Import logo from public folder
+import assuraLogo from "./assets/assura_logo.svg"; // (if you want to use the SVG in the future)
+import assuraLogoPng from "./assets/assura_logo.png"; // import the PNG
 
 // Navbar component
 function Navbar() {
@@ -24,6 +25,18 @@ function Navbar() {
   );
 }
 
+function SplashScreen() {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+      <img
+        src={assuraLogo}
+        alt="Assura Logo"
+        className="w-64 max-w-xs animate-pulse transition-all duration-700"
+        style={{ filter: "drop-shadow(0 0 24px #1E3E89)" }}
+      />
+    </div>
+  );
+}
 
 export default function App() {
   // Shared form state across all steps
@@ -39,6 +52,14 @@ export default function App() {
     needsDistributionList: false,
   });
   const [step, setStep] = useState(1);
+  const [animating, setAnimating] = useState(false);
+  const [direction, setDirection] = useState("forward"); // "forward" or "backward"
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSplash(false), 1500); // 1.5s splash
+    return () => clearTimeout(timer);
+  }, []);
 
   // Handle input changes for text, date, and checkbox fields
   const handleChange = (e) => {
@@ -73,8 +94,22 @@ export default function App() {
   };
 
   // Navigation handlers for Next/Back buttons
-  const nextStep = () => setStep((s) => s + 1);
-  const prevStep = () => setStep((s) => s - 1);
+  const nextStep = () => {
+    setDirection("forward");
+    setAnimating(true);
+    setTimeout(() => {
+      setStep((s) => s + 1);
+      setAnimating(false);
+    }, 400);
+  };
+  const prevStep = () => {
+    setDirection("backward");
+    setAnimating(true);
+    setTimeout(() => {
+      setStep((s) => s - 1);
+      setAnimating(false);
+    }, 400);
+  };
 
   // Submit handler (placeholder implementation)
   const handleSubmit = () => {
@@ -82,10 +117,20 @@ export default function App() {
     // In a real app, you'd send formData to a server or API here
   };
 
+  if (showSplash) return <SplashScreen />;
+
   return (
     <>
       <Navbar />
-      <main className="max-w-lg mx-auto p-6">
+      <main
+        className={`max-w-lg mx-auto p-6 transition-all duration-400 ${
+          animating
+            ? direction === "forward"
+              ? "opacity-0 translate-x-10"
+              : "opacity-0 -translate-x-10"
+            : "opacity-100 translate-x-0"
+        }`}
+      >
         {/* Render the current section based on the step */}
         {step === 1 && (
           <UserDetails formData={formData} handleChange={handleChange} />
