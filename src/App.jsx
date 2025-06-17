@@ -152,7 +152,7 @@ export default function App() {
             <button
               type="button"
               onClick={prevStep}
-              className="px-4 py-2 border rounded"
+              className="px-4 py-2 rounded bg-[#9375B2] text-white font-semibold hover:bg-[#7a5e99] transition-colors"
             >
               Back
             </button>
@@ -161,7 +161,7 @@ export default function App() {
             <button
               type="button"
               onClick={nextStep}
-              className="px-4 py-2 border rounded"
+              className="px-4 py-2 rounded bg-[#9375B2] text-white font-semibold hover:bg-[#7a5e99] transition-colors"
             >
               Next
             </button>
