@@ -1,6 +1,6 @@
 ## 🚀 Getting Started with New Starter Form
 
-Welcome to the **New Starter Form** project! This is a modern React app powered by [Vite](https://vitejs.dev/) for lightning-fast development and build times.
+Welcome to Assura's **New Starter Form** project! This is a modern React app powered by [Vite](https://vitejs.dev/) for lightning-fast development and build times.
 
 ---
 
@@ -61,5 +61,3 @@ PRs and issues welcome! Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 MIT
 
 ---
-
-Happy coding! 🚀
