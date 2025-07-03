@@ -1,42 +1,60 @@
 // src/DirectoriesAndAccess.jsx
+import React from "react";
+
+const fileOptions = [
+  "Development",
+  "Finance",
+  "Group",
+  "HR",
+  "H&S",
+  "Investment",
+  "IT",
+  "Marketing & Comms Library",
+  "Office Info",
+  "Property",
+  "Property Individual",
+  "Social Impact",
+  "Statutory Entities",
+  "Sustainability",
+];
+
 export default function DirectoriesAndAccess({ formData, handleChange }) {
-  const sharepointSites = [
-    "Development",
-    "Finance",
-    "Group",
-    "HR",
-    "H&S",
-    "Investment",
-    "IT",
-    "Marketing",
-    "Office Information",
-    "Property",
-    "Property Individual",
-    "Social Impact",
-    "Statutory Entities",
-    "Sustainability"
-  ];
+  // Handle main file access checkboxes
+  const handleFileAccessChange = (e) => {
+    const { value, checked } = e.target;
+    const selected = Array.isArray(formData.fileAccess) ? formData.fileAccess : [];
+    let updated;
+    if (checked) {
+      updated = [...selected, value];
+    } else {
+      updated = selected.filter((v) => v !== value);
+    }
+    handleChange({
+      name: "fileAccess",
+      value: updated,
+    });
+  };
 
   return (
     <div>
       <h2 className="text-xl font-semibold mb-2">Directories &amp; Access</h2>
-      <div className="space-y-4">
-        <span className="font-medium block mb-1">File Access- SharePoint Sites</span>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {sharepointSites.map(site => (
-            <label key={site} className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                name="fileAccess"
-                value={site}
-                checked={formData.fileAccess?.includes(site)}
-                onChange={handleChange}
-                className="accent-blue-600"
-              />
-              <span>{site}</span>
-            </label>
-          ))}
-        </div>
+      <p className="mb-4 text-gray-700">
+        Select which directories and shared drives the new starter will need access to.
+      </p>
+      <div className="space-y-2">
+        {fileOptions.map((option) => (
+          <label key={option} className="flex items-center">
+            <input
+              type="checkbox"
+              name="fileAccess"
+              value={option}
+              checked={Array.isArray(formData.fileAccess) && formData.fileAccess.includes(option)}
+              onChange={handleFileAccessChange}
+              className="accent-[#9375B2]"
+            />
+            <span className="ml-2">{option}</span>
+          </label>
+        ))}
       </div>
     </div>
   );
