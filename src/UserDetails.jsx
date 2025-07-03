@@ -118,15 +118,17 @@ export default function UserDetails({ formData, handleChange }) {
             placeholder="e.g., MRICS, MCIPD, MBCS"
           />
         </label>
-        <label className="block font-medium mb-1">Start Date</label>
-        <DatePicker
-          selected={startDateValue}
-          onChange={handleDateChange}
-          dateFormat="dd/MM/yyyy"
-          className="w-full p-2 border rounded font-gothic"
-          placeholderText="Select start date"
-          calendarClassName="font-gothic"
-        />
+        <div>
+          <label className="block font-medium">Start Date *</label>
+          <DatePicker
+            selected={startDateValue}
+            onChange={handleDateChange}
+            dateFormat="dd/MM/yyyy"
+            className="w-full p-2 border rounded font-gothic"
+            placeholderText="Select start date"
+            calendarClassName="font-gothic"
+          />
+        </div>
       </div>
     </div>
   );
