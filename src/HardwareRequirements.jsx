@@ -6,7 +6,7 @@ export default function HardwareRequirements({ formData, handleChange }) {
       <div className="space-y-4">
         {/* Device Type */}
         <label className="block">
-          <span className="font-medium">Device Type</span>
+          <span className="font-medium">Device Type *</span>
           <select
             name="deviceType"
             value={formData.deviceType}
@@ -55,7 +55,7 @@ export default function HardwareRequirements({ formData, handleChange }) {
 
         {/* Laptop Bag */}
         <label className="block">
-          <span className="font-medium">Laptop Bag</span>
+          <span className="font-medium">Laptop Bag *</span>
           <select
             name="laptopBag"
             value={formData.laptopBag}
@@ -71,7 +71,7 @@ export default function HardwareRequirements({ formData, handleChange }) {
 
         {/* Headset */}
         <label className="block">
-          <span className="font-medium">Headset</span>
+          <span className="font-medium">Headset *</span>
           <select
             name="headset"
             value={formData.headset}
