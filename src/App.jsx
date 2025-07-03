@@ -8,7 +8,6 @@ import ReviewAndSubmit from "./ReviewAndSubmit.jsx";
 
 // Import logo from public folder
 import assuraLogo from "./assets/assura_logo.svg"; // (if you want to use the SVG in the future)
-import assuraLogoPng from "./assets/assura_logo.png"; // import the PNG
 
 // Navbar component
 function Navbar() {
@@ -31,8 +30,7 @@ function SplashScreen() {
       <img
         src={assuraLogo}
         alt="Assura Logo"
-        className="w-64 max-w-xs animate-pulse transition-all duration-700"
-        style={{ filter: "drop-shadow(0 0 24px #1E3E89)" }}
+        className="w-64 max-w-xs animate-pulse transition-all duration-700 logo-shadow"
       />
     </div>
   );
