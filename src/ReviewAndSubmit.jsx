@@ -1,6 +1,23 @@
 import React from "react";
 
 export default function ReviewAndSubmit({ formData }) {
+  // Build hardware summary
+  const hardwareItems = [
+    formData.deviceType === "Other"
+      ? formData.deviceTypeOther
+      : formData.deviceType,
+    formData.companymobile && "Company Mobile",
+    formData.keyboardmouse && "Keyboard & Mouse",
+    formData.dockingstation && "Docking Station",
+    formData.monitor && "Monitor",
+    formData.laptopBag && `Laptop Bag: ${formData.laptopBag}`,
+    formData.headset && `Headset: ${formData.headset}`,
+    formData.otherEquipment && `Other: ${formData.otherEquipment}`,
+    formData.courierRequired && "Courier required for equipment delivery",
+  ]
+    .filter(Boolean)
+    .map((item, i) => <li key={i}>{item}</li>);
+
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">Review &amp; Submit</h2>
@@ -8,30 +25,37 @@ export default function ReviewAndSubmit({ formData }) {
         <table className="min-w-full border border-gray-300 rounded shadow bg-white">
           <tbody>
             {/* User Details */}
-            <tr className="bg-gray-100">
-              <th colSpan={2} className="text-left px-4 py-2 font-bold text-base border-b border-gray-300">
+            <tr className="bg-gray-200">
+              <th
+                colSpan={2}
+                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-[#9375B2]"
+              >
                 User Details
               </th>
             </tr>
             <tr>
               <td className="px-4 py-2 font-semibold w-48">First Name</td>
-              <td className="px-4 py-2">{formData.firstName || <span className="text-gray-400">—</span>}</td>
+              <td className="px-4 py-2">{formData.forename || <span className="text-gray-400">—</span>}</td>
             </tr>
             <tr>
               <td className="px-4 py-2 font-semibold">Last Name</td>
-              <td className="px-4 py-2">{formData.lastName || <span className="text-gray-400">—</span>}</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-2 font-semibold">Email</td>
-              <td className="px-4 py-2">{formData.email || <span className="text-gray-400">—</span>}</td>
+              <td className="px-4 py-2">{formData.surname || <span className="text-gray-400">—</span>}</td>
             </tr>
             <tr>
               <td className="px-4 py-2 font-semibold">Department</td>
-              <td className="px-4 py-2">{formData.department || <span className="text-gray-400">—</span>}</td>
+              <td className="px-4 py-2">
+                {formData.department === "Other"
+                  ? formData.departmentOther || <span className="text-gray-400">—</span>
+                  : formData.department || <span className="text-gray-400">—</span>}
+              </td>
             </tr>
             <tr>
               <td className="px-4 py-2 font-semibold">Job Title</td>
               <td className="px-4 py-2">{formData.jobTitle || <span className="text-gray-400">—</span>}</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 font-semibold">Designatory Letters</td>
+              <td className="px-4 py-2">{formData.designatoryLetters || <span className="text-gray-400">—</span>}</td>
             </tr>
             <tr>
               <td className="px-4 py-2 font-semibold">Start Date</td>
@@ -39,23 +63,31 @@ export default function ReviewAndSubmit({ formData }) {
             </tr>
 
             {/* Hardware Requirements */}
-            <tr className="bg-gray-100">
-              <th colSpan={2} className="text-left px-4 py-2 font-bold text-base border-b border-gray-300">
+            <tr className="bg-gray-200">
+              <th
+                colSpan={2}
+                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-[#9375B2]"
+              >
                 Hardware Requirements
               </th>
             </tr>
             <tr>
-              <td className="px-4 py-2 font-semibold">Hardware</td>
+              <td className="px-4 py-2 font-semibold align-top">Hardware</td>
               <td className="px-4 py-2">
-                {Array.isArray(formData.hardware) && formData.hardware.length > 0
-                  ? formData.hardware.join(", ")
-                  : <span className="text-gray-400">No hardware selected</span>}
+                {hardwareItems.length > 0 ? (
+                  <ul className="list-disc ml-4">{hardwareItems}</ul>
+                ) : (
+                  <span className="text-gray-400">No hardware selected</span>
+                )}
               </td>
             </tr>
 
             {/* Apps & Services */}
-            <tr className="bg-gray-100">
-              <th colSpan={2} className="text-left px-4 py-2 font-bold text-base border-b border-gray-300">
+            <tr className="bg-gray-200">
+              <th
+                colSpan={2}
+                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-[#9375B2]"
+              >
                 Apps &amp; Services
               </th>
             </tr>
@@ -93,8 +125,11 @@ export default function ReviewAndSubmit({ formData }) {
             )}
 
             {/* Directories & Access */}
-            <tr className="bg-gray-100">
-              <th colSpan={2} className="text-left px-4 py-2 font-bold text-base border-b border-gray-300">
+            <tr className="bg-gray-200">
+              <th
+                colSpan={2}
+                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-[#9375B2]"
+              >
                 Directories &amp; Access
               </th>
             </tr>
