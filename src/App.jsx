@@ -111,11 +111,29 @@ export default function App() {
     }, 400);
   };
 
-  // Submit handler (placeholder implementation)
+  // Submit handler (updated to always include "Comms Library" and "Office Information")
   const handleSubmit = () => {
-    console.log("Form Submitted:", formData);
-    // In a real app, you'd send formData to a server or API here
+    // Ensure fileAccess is an array
+    const fileAccess = Array.isArray(formData.fileAccess) ? formData.fileAccess : [];
+    // Add required items if not already present
+    const required = ["Comms Library", "Office Information"];
+    const updatedFileAccess = Array.from(new Set([...fileAccess, ...required]));
+
+    // Submit with updated fileAccess
+    const submissionData = {
+      ...formData,
+      fileAccess: updatedFileAccess,
+    };
+
+    console.log("Form Submitted:", submissionData);
+    // In a real app, you'd send submissionData to a server or API here
   };
+
+  // Always include these in fileAccess for review and submit
+  const required = ["Comms Library", "Office Information"];
+  const patchedFileAccess = Array.from(
+    new Set([...(formData.fileAccess || []), ...required])
+  );
 
   if (showSplash) return <SplashScreen />;
 
@@ -144,7 +162,9 @@ export default function App() {
         {step === 4 && (
           <DirectoriesAndAccess formData={formData} handleChange={handleChange} />
         )}
-        {step === 5 && <ReviewAndSubmit formData={formData} />}
+        {step === 5 && (
+          <ReviewAndSubmit formData={{ ...formData, fileAccess: patchedFileAccess }} />
+        )}
 
         {/* Navigation buttons */}
         <div className="mt-4 flex justify-between">
