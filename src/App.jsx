@@ -135,6 +135,21 @@ export default function App() {
     new Set([...(formData.fileAccess || []), ...required])
   );
 
+  // Validation logic for required fields
+  const isUserDetailsValid = !!(
+    formData.forename &&
+    formData.surname &&
+    formData.department &&
+    formData.jobTitle &&
+    formData.startDate
+  );
+
+  const isHardwareValid = !!(
+    formData.deviceType &&
+    formData.laptopBag &&
+    formData.headset
+  );
+
   if (showSplash) return <SplashScreen />;
 
   return (
@@ -181,7 +196,16 @@ export default function App() {
             <button
               type="button"
               onClick={nextStep}
-              className="px-4 py-2 rounded bg-[#9375B2] text-white font-semibold hover:bg-[#7a5e99] transition-colors"
+              className={`px-4 py-2 rounded bg-[#9375B2] text-white font-semibold transition-colors ${
+                (step === 1 && !isUserDetailsValid) ||
+                (step === 2 && !isHardwareValid)
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-[#7a5e99]"
+              }`}
+              disabled={
+                (step === 1 && !isUserDetailsValid) ||
+                (step === 2 && !isHardwareValid)
+              }
             >
               Next
             </button>
