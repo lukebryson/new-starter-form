@@ -49,7 +49,6 @@ export default function DirectoriesAndAccess({ formData, handleChange }) {
               value={option}
               checked={Array.isArray(formData.fileAccess) && formData.fileAccess.includes(option)}
               onChange={handleFileAccessChange}
-              className="accent-[#9375B2]"
             />
             <span className="ml-2">{option}</span>
           </label>

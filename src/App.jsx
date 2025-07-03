@@ -8,7 +8,6 @@ import ReviewAndSubmit from "./ReviewAndSubmit.jsx";
 
 // Import logo from public folder
 import assuraLogo from "./assets/assura_logo.svg"; // (if you want to use the SVG in the future)
-import assuraLogoPng from "./assets/assura_logo.png"; // import the PNG
 
 // Navbar component
 function Navbar() {
