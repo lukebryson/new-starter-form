@@ -10,7 +10,6 @@ const fileOptions = [
   "Investment",
   "IT",
   "Marketing & Comms Library",
-  "Office Info",
   "Property",
   "Property Individual",
   "Social Impact",
