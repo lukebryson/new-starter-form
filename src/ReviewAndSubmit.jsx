@@ -28,7 +28,7 @@ export default function ReviewAndSubmit({ formData }) {
             <tr className="bg-gray-200">
               <th
                 colSpan={2}
-                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-[#9375B2]"
+                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-secondary"
               >
                 User Details
               </th>
@@ -66,7 +66,7 @@ export default function ReviewAndSubmit({ formData }) {
             <tr className="bg-gray-200">
               <th
                 colSpan={2}
-                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-[#9375B2]"
+                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-secondary"
               >
                 Hardware Requirements
               </th>
@@ -86,7 +86,7 @@ export default function ReviewAndSubmit({ formData }) {
             <tr className="bg-gray-200">
               <th
                 colSpan={2}
-                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-[#9375B2]"
+                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-secondary"
               >
                 Apps &amp; Services
               </th>
@@ -128,7 +128,7 @@ export default function ReviewAndSubmit({ formData }) {
             <tr className="bg-gray-200">
               <th
                 colSpan={2}
-                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-[#9375B2]"
+                className="text-left px-4 py-3 font-bold text-base border-b border-gray-300 border-t-4 border-t-secondary"
               >
                 Directories &amp; Access
               </th>

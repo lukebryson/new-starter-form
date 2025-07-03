@@ -8,12 +8,11 @@ import ReviewAndSubmit from "./ReviewAndSubmit.jsx";
 
 // Import logo from public folder
 import assuraLogo from "./assets/assura_logo.svg"; // (if you want to use the SVG in the future)
-import assuraLogoPng from "./assets/assura_logo.png"; // import the PNG
 
 // Navbar component
 function Navbar() {
   return (
-    <nav className="bg-[#1E3E89] text-white flex items-center justify-center px-4 py-3 mb-8 rounded-b-lg shadow">
+    <nav className="bg-primary text-white flex items-center justify-center px-4 py-3 mb-8 rounded-b-lg shadow">
       {/* Centered Logo and Title */}
       <div className="flex items-center gap-3">
         <img src={assuraLogo} alt="Assura logo" className="h-12 w-auto" />
@@ -187,7 +186,7 @@ export default function App() {
             <button
               type="button"
               onClick={prevStep}
-              className="px-4 py-2 rounded bg-[#9375B2] text-white font-semibold hover:bg-[#7a5e99] transition-colors"
+              className="px-4 py-2 rounded bg-secondary text-white font-semibold hover:bg-secondary-dark transition-colors"
             >
               Back
             </button>
@@ -196,11 +195,11 @@ export default function App() {
             <button
               type="button"
               onClick={nextStep}
-              className={`px-4 py-2 rounded bg-[#9375B2] text-white font-semibold transition-colors ${
+              className={`px-4 py-2 rounded bg-secondary text-white font-semibold transition-colors ${
                 (step === 1 && !isUserDetailsValid) ||
                 (step === 2 && !isHardwareValid)
                   ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-[#7a5e99]"
+                  : "hover:bg-secondary-dark"
               }`}
               disabled={
                 (step === 1 && !isUserDetailsValid) ||
@@ -213,7 +212,7 @@ export default function App() {
             <button
               type="button"
               onClick={handleSubmit}
-              className="px-4 py-2 border rounded bg-[#95C7ED] text-white font-semibold hover:bg-[#7bbbe2] transition-colors"
+              className="px-4 py-2 border rounded bg-accent text-white font-semibold hover:bg-accent-dark transition-colors"
             >
               Submit
             </button>
