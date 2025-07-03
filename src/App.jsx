@@ -30,8 +30,7 @@ function SplashScreen() {
       <img
         src={assuraLogo}
         alt="Assura Logo"
-        className="w-64 max-w-xs animate-pulse transition-all duration-700"
-        style={{ filter: "drop-shadow(0 0 24px #1E3E89)" }}
+        className="w-64 max-w-xs animate-pulse transition-all duration-700 logo-shadow"
       />
     </div>
   );

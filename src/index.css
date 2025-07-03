@@ -14,3 +14,8 @@ input[type="checkbox"] {
 .react-datepicker * {
   font-family: 'Century Gothic', Arial, sans-serif !important;
 }
+
+/* Utility class for drop shadow on the splash screen logo */
+.logo-shadow {
+  filter: drop-shadow(0 0 24px #1E3E89);
+}
